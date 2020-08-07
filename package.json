@@ -1,0 +1,25 @@
+{
+  "name": "lazy-require.macro",
+  "version": "0.0.0",
+  "main": "dist/lazy-require.macro.cjs.js",
+  "module": "dist/lazy-require.macro.esm.js",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "prepublishOnly": "preconstruct build"
+  },
+  "dependencies": {
+    "babel-plugin-macros": "2.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@preconstruct/cli": "^1.1.20",
+    "@types/babel__core": "^7.1.9",
+    "typescript": "^3.9.7"
+  }
+}
