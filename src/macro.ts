@@ -31,13 +31,11 @@ export default createMacro(({ babel, references, state }) => {
     if (cache[moduleSpecifier] !== undefined) {
       return t.identifier(cache[moduleSpecifier]);
     }
-    let name = programPath.scope.generateDeclaredUidIdentifier(
-      `lazyRequire-${moduleSpecifier}`
-    );
-    cache[moduleSpecifier] = name.name;
+    let name = programPath.scope.generateUid(`lazyRequire-${moduleSpecifier}`);
+    cache[moduleSpecifier] = name;
     programPath.node.body.push(
       t.functionDeclaration(
-        name,
+        t.identifier(name),
         [],
         t.blockStatement([
           t.variableDeclaration("var", [
@@ -51,7 +49,7 @@ export default createMacro(({ babel, references, state }) => {
           t.expressionStatement(
             t.assignmentExpression(
               "=",
-              t.identifier(name.name),
+              t.identifier(name),
               t.functionExpression(
                 undefined,
                 [],
@@ -63,7 +61,7 @@ export default createMacro(({ babel, references, state }) => {
         ])
       )
     );
-    return t.identifier(name.name);
+    return t.identifier(name);
   };
   if (references["lazyRequire"]) {
     references["lazyRequire"].forEach((reference) => {
@@ -90,6 +88,7 @@ export default createMacro(({ babel, references, state }) => {
           "lazyRequire must not have any runtime arguments"
         );
       }
+
       reference.replaceWith(
         getIdentifierForModuleSpecifier(
           parentNode.typeParameters.params[0].exprName.argument.value
