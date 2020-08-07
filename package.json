@@ -1,6 +1,6 @@
 {
   "name": "lazy-require.macro",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "dist/lazy-require.macro.cjs.js",
   "module": "dist/lazy-require.macro.esm.js",
   "license": "MIT",
